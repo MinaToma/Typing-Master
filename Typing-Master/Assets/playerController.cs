@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour {
     
-    private Rigidbody2D playerRigid2d;
     public GameObject shot;
     public Transform ship;
-    
+    public float targetX, targetY, angle;
+    public Transform target;
     void Start ()
     {
-        playerRigid2d = GetComponent<Rigidbody2D>();
     }
 	
 	void Update ()
@@ -22,15 +21,15 @@ public class playerController : MonoBehaviour {
                 Instantiate(shot, ship.position, ship.rotation);
             }
         }
+
+        if (Input.GetKeyDown("left"))
+            rotate();
     }
 
-    void RotateLeft ()
+    void rotate()
     {
-        transform.Rotate(Vector3.forward * -5);
-    }
-
-    void RotateRight()
-    {
-        transform.Rotate(Vector3.forward * 5);
+        Vector3 offset = target.position - ship.position;
+        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, offset);
+        ship.rotation = rotation;
     }
 }
