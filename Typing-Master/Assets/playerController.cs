@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class playerController : MonoBehaviour {
+//
+
     
     public GameObject shot;
     public Transform ship;
