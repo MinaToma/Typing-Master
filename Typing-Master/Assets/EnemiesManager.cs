@@ -10,7 +10,6 @@ public class EnemiesManager : MonoBehaviour
 
     public void MakeRandomShip()
     {
-        Console.WriteLine("DDD");
         int arraIdx = UnityEngine.Random.Range(0, enemySprites.Length);
         Sprite shipSprite = enemySprites[arraIdx];
         string shipName = shipSprite.name;
@@ -19,15 +18,15 @@ public class EnemiesManager : MonoBehaviour
         go.name = shipName;
         go.GetComponent<EnemyClass>().shipName = shipName;
 
-        go.GetComponent<SpriteRenderer>().transform.position = new Vector2(UnityEngine.Random.Range(-3, 3), 6);
+        go.GetComponent<SpriteRenderer>().transform.position = new Vector2(UnityEngine.Random.Range(-4, 4), UnityEngine.Random.Range(4.5f, 10f));
 
         go.GetComponent<SpriteRenderer>().sprite = shipSprite;
-
+        Console.WriteLine(go.GetComponent<Collider2D>().isTrigger);
     }
 
     void Start()
     {
-       for(int i = 0; i < 10; i++)
+       for(int i = 0; i < 15; i++)
         {
             MakeRandomShip();
         }
