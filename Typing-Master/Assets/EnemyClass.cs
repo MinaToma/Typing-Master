@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyClass : MonoBehaviour
 {
-    private Vector2 origPos;
+    public Transform ship;
+    public Vector2 pos;
     public string shipName;
     public bool returnToOrigin = false;
 
@@ -17,6 +18,9 @@ public class EnemyClass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      //  Vector3 offset = playerShip.position - enemyShips[i].transform.position;
+        //Quaternion rotation = Quaternion.LookRotation(Vector3.forward, offset);
 
+        //enemyShips[i].transform.rotation = rotation;
     }
 }

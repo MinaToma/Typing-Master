@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 056b69e6f190c8d4690da312b11cb793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship: {fileID: 1610962884297365686, guid: 41bdf3dd4e10add4a9d5462b5de7fcf7, type: 3}
+  pos: {x: 0, y: 0}
   shipName: 
   returnToOrigin: 0
 --- !u!61 &8681394025694789100
@@ -137,7 +139,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.01
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

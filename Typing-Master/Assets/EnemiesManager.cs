@@ -7,7 +7,8 @@ public class EnemiesManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public Sprite[] enemySprites;
-
+    public static List<GameObject> enemyShips = new List<GameObject>();
+    public GameObject playerShip;
     public void MakeRandomShip()
     {
         int arraIdx = UnityEngine.Random.Range(0, enemySprites.Length);
@@ -21,7 +22,18 @@ public class EnemiesManager : MonoBehaviour
         go.GetComponent<SpriteRenderer>().transform.position = new Vector2(UnityEngine.Random.Range(-4, 4), UnityEngine.Random.Range(4.5f, 10f));
 
         go.GetComponent<SpriteRenderer>().sprite = shipSprite;
-        Console.WriteLine(go.GetComponent<Collider2D>().isTrigger);
+        float xSpeed = 0;
+        if (go.transform.position.x < playerShip.transform.position.x)
+        {
+            xSpeed = 0.1f;
+        }
+        if (go.transform.position.x > playerShip.transform.position.x)
+        {
+            xSpeed = -0.1f;
+        }
+        go.GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed , -0.3f);
+        Physics2D.IgnoreCollision(go.GetComponent<Collider2D>(), go.GetComponent<Collider2D>());
+        enemyShips.Add(go);
     }
 
     void Start()
@@ -30,6 +42,19 @@ public class EnemiesManager : MonoBehaviour
         {
             MakeRandomShip();
         }
+    }
+
+    void Update()
+    {
+        Console.WriteLine("Test");
+       
+        for (int i = 0; i < 15; i++)
+        {
+            Vector3 offset = playerShip.transform.position - enemyShips[i].transform.position;
+            Quaternion rotation = Quaternion.LookRotation(Vector3.forward, offset);
+            enemyShips[i].transform.rotation = rotation;
+        }
+       
     }
 
 }
