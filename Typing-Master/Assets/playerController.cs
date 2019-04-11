@@ -20,7 +20,9 @@ public class playerController : MonoBehaviour {
         {
             if (Input.GetKeyDown(vKey))
             {
-                Instantiate(shot, ship.position, ship.rotation);
+                Vector3 shotPos = ship.position;
+                shotPos.y += 0.5f;
+                Instantiate(shot, shotPos, ship.rotation);
             }
         }
 
