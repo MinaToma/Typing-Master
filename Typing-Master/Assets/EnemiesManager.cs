@@ -5,6 +5,10 @@ using System;
 
 public class EnemiesManager : MonoBehaviour
 {
+    //TO-DO: READ FROM FILE
+    //TO-DO: ROTATE THE TEXT
+
+    String[] arr = { "Hi", "Test", "Welcome", "Game", "Mina", "Mehiesen", "Ahmed", "Sobhy", "Mariam" };
     public GameObject enemyPrefab;
     public Sprite[] enemySprites;
     public static List<GameObject> enemyShips = new List<GameObject>();
@@ -18,6 +22,14 @@ public class EnemiesManager : MonoBehaviour
         GameObject go = Instantiate(enemyPrefab);
         go.name = shipName;
         go.GetComponent<EnemyClass>().shipName = shipName;
+
+
+        go.GetComponentInChildren<TextMesh>().offsetZ = 500;
+        //go.GetComponentInChildren<TextMesh>().fontSize = 7;
+        go.GetComponentInChildren<MeshRenderer>().sortingLayerName = "Player";
+        go.GetComponentInChildren<MeshRenderer>().sortingOrder = 50;
+        go.GetComponentInChildren<TextMesh>().text = arr[UnityEngine.Random.Range(0, arr.Length)];
+        //go.GetComponentInChildren<TextMesh>().transform.rotation
 
         go.GetComponent<SpriteRenderer>().transform.position = new Vector2(UnityEngine.Random.Range(-4, 4), UnityEngine.Random.Range(4.5f, 10f));
 
