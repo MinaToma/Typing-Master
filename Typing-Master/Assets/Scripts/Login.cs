@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.Text.RegularExpressions;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class Login : MonoBehaviour {
 
@@ -56,7 +57,7 @@ public class Login : MonoBehaviour {
                     char Decrypted = (char)(c / i);
                     DecryptedPass += Decrypted.ToString();
                 }
-                if(Password == DecryptedPass)
+                if(Password.Equals(DecryptedPass))
                 {
                     PS = true;
                 }
@@ -80,7 +81,7 @@ public class Login : MonoBehaviour {
              username.GetComponent<InputField>().text = "";
              password.GetComponent<InputField>().text = "";
             print("Login Successfull");
-            Application.LoadLevel("main");
+            SceneManager.LoadScene("MainWindow");
         }
         
 

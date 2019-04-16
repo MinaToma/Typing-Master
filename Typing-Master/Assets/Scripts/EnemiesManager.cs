@@ -8,11 +8,12 @@ public class EnemiesManager : MonoBehaviour
     //TO-DO: READ FROM FILE
     //TO-DO: ROTATE THE TEXT
 
-    String[] arr = { "Hi", "Test", "Welcome", "Game", "Mina", "Mehiesen", "Ahmed", "Sobhy", "Mariam" };
+    String[] arr = { "hi", "test", "welcome", "game", "mina", "mehiesen", "ahmed", "sobhy", "mariam" };
     public GameObject enemyPrefab;
     public Sprite[] enemySprites;
     public static List<GameObject> enemyShips = new List<GameObject>();
     public GameObject playerShip;
+
     public void MakeRandomShip()
     {
         int arraIdx = UnityEngine.Random.Range(0, enemySprites.Length);
@@ -50,7 +51,7 @@ public class EnemiesManager : MonoBehaviour
 
     void Start()
     {
-       for(int i = 0; i < 15; i++)
+       for(int i = 0; i < 1; i++)
         {
             MakeRandomShip();
         }
@@ -65,8 +66,30 @@ public class EnemiesManager : MonoBehaviour
             Vector3 offset = playerShip.transform.position - enemyShips[i].transform.position;
             Quaternion rotation = Quaternion.LookRotation(Vector3.forward, offset);
             enemyShips[i].transform.rotation = rotation;
+            float xSpeed = 0;
+            if (enemyShips[i].transform.position.x < playerShip.transform.position.x)
+            {
+                xSpeed = 0.1f;
+            }
+            if (enemyShips[i].transform.position.x > playerShip.transform.position.x)
+            {
+                xSpeed = -0.1f;
+            }
+            enemyShips[i].GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed, -0.3f);
         }
        
     }
 
+    static public bool hit(GameObject go)
+    {
+        if (go.GetComponentInChildren<TextMesh>().text.Length == 1)
+        {
+            enemyShips.Remove(go);
+            return true;
+        }
+        go.GetComponentInChildren<TextMesh>().text = go.GetComponentInChildren<TextMesh>().text.Substring(1);
+        return false;
+    }
+
 }
+
