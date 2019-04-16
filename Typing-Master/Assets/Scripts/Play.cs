@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Play : MonoBehaviour {
 
-	static public void startGame()
+
+    public void startGame()
     {
         SceneManager.LoadScene("main");
     }
-    
 }
