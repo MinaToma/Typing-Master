@@ -6,7 +6,6 @@ using System;
 public class EnemiesManager : MonoBehaviour
 {
     //TO-DO: READ FROM FILE
-    //TO-DO: ROTATE THE TEXT
 
     String[] arr = { "hi", "test", "welcome", "game", "mina", "mehiesen", "ahmed", "sobhy", "mariam" };
     public GameObject enemyPrefab;
@@ -30,9 +29,10 @@ public class EnemiesManager : MonoBehaviour
         go.GetComponentInChildren<MeshRenderer>().sortingLayerName = "Player";
         go.GetComponentInChildren<MeshRenderer>().sortingOrder = 50;
         go.GetComponentInChildren<TextMesh>().text = arr[UnityEngine.Random.Range(0, arr.Length)];
+
         //go.GetComponentInChildren<TextMesh>().transform.rotation
 
-        go.GetComponent<SpriteRenderer>().transform.position = new Vector2(UnityEngine.Random.Range(-4, 4), UnityEngine.Random.Range(4.5f, 10f));
+        go.GetComponent<SpriteRenderer>().transform.position = new Vector2(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(4.5f, 10f));
 
         go.GetComponent<SpriteRenderer>().sprite = shipSprite;
         float xSpeed = 0;
@@ -59,10 +59,10 @@ public class EnemiesManager : MonoBehaviour
 
     void Update()
     {
-        Console.WriteLine("Test");
        
         for (int i = 0; i < 15; i++)
         {
+            
             Vector3 offset = playerShip.transform.position - enemyShips[i].transform.position;
             Quaternion rotation = Quaternion.LookRotation(Vector3.forward, offset);
             enemyShips[i].transform.rotation = rotation;
