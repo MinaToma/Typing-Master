@@ -12,8 +12,11 @@ public class playerController : MonoBehaviour {
     void Start ()
     {
     }
-	
-	void Update ()
+
+
+    
+
+    void Update ()
     {
 
        foreach (KeyCode vKey in System.Enum.GetValues(typeof(KeyCode)))
@@ -29,15 +32,18 @@ public class playerController : MonoBehaviour {
                     foreach(GameObject go in EnemiesManager.enemyShips)
                      {
                         Debug.Log((go.GetComponentInChildren<TextMesh>().text[0]));
-                        if(key[0].Equals(go.GetComponentInChildren<TextMesh>().text[0]) && go.transform.position.y > 0)
+                        if(key[0].Equals(go.GetComponentInChildren<TextMesh>().text[0]) && go.transform.position.y > -4)
                         {
                             
                             Vector3 shotPos = ship.position;
                             shotPos.y += 0.5f;
                             target = go;
                             rotate();
-                            Instantiate(shot, shotPos, ship.rotation);
 
+
+                            GameObject shotObj = Instantiate(shot, shotPos, ship.rotation);
+
+                            Destroy(shotObj, Vector3.Distance(shotObj.transform.position, go.transform.position)/5);
 
                             if (EnemiesManager.hit(go))
                                 target = null;
@@ -49,15 +55,16 @@ public class playerController : MonoBehaviour {
 
                 else if(key[0].Equals(target.GetComponentInChildren<TextMesh>().text[0]))
                 {
-                    target = EnemiesManager.enemyShips[0];
                     Vector3 shotPos = ship.position;
                     shotPos.y += 0.5f;
                     rotate();
 
+                    GameObject shotObj = Instantiate(shot, shotPos, ship.rotation);
+
+                    Destroy(shotObj, Vector3.Distance(shotObj.transform.position, target.transform.position) / 5);
+
                     if (EnemiesManager.hit(target))
                         target = null;
-
-                    Instantiate(shot, shotPos, ship.rotation);
                 }
             }
         }

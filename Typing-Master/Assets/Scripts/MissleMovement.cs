@@ -11,5 +11,7 @@ public class MissleMovement : MonoBehaviour {
     {
         missle = GetComponent<Rigidbody2D>();
         missle.velocity = transform.up * speed;
-    }	
+    }
+
+    
 }

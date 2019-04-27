@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.IO;
 
 public class EnemiesManager : MonoBehaviour
 {
-    //TO-DO: READ FROM FILE
 
-    String[] arr = { "hi", "test", "welcome", "game", "mina", "mehiesen", "ahmed", "sobhy", "mariam" };
+    List<String> [] words= new List<string>[26];
+
+
     public GameObject enemyPrefab;
     public Sprite[] enemySprites;
     public static List<GameObject> enemyShips = new List<GameObject>();
     public GameObject playerShip;
 
-    public void MakeRandomShip()
+    public void MakeRandomShip(int charRow)
     {
         int arraIdx = UnityEngine.Random.Range(0, enemySprites.Length);
         Sprite shipSprite = enemySprites[arraIdx];
@@ -28,8 +30,7 @@ public class EnemiesManager : MonoBehaviour
         //go.GetComponentInChildren<TextMesh>().fontSize = 7;
         go.GetComponentInChildren<MeshRenderer>().sortingLayerName = "Player";
         go.GetComponentInChildren<MeshRenderer>().sortingOrder = 50;
-        go.GetComponentInChildren<TextMesh>().text = arr[UnityEngine.Random.Range(0, arr.Length)];
-
+        go.GetComponentInChildren<TextMesh>().text = words[charRow][0];
         //go.GetComponentInChildren<TextMesh>().transform.rotation
 
         go.GetComponent<SpriteRenderer>().transform.position = new Vector2(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(4.5f, 10f));
@@ -51,16 +52,23 @@ public class EnemiesManager : MonoBehaviour
 
     void Start()
     {
-       for(int i = 0; i < 15; i++)
+        for(int i = 0; i < 26; i++)
         {
-            MakeRandomShip();
+            words[i] = new List<string>();
         }
+       readWords();
+        for(int i = 0; i < 15; i++)
+        {
+            MakeRandomShip(i);
+        }
+            
+     
     }
 
     void Update()
     {
        
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < enemyShips.Count; i++)
         {
             
             Vector3 offset = playerShip.transform.position - enemyShips[i].transform.position;
@@ -84,6 +92,8 @@ public class EnemiesManager : MonoBehaviour
     {
         if (go.GetComponentInChildren<TextMesh>().text.Length == 1)
         {
+            go.GetComponentInChildren<TextMesh>().text = "=_=";
+            Destroy(go, 2f);
             enemyShips.Remove(go);
             return true;
         }
@@ -91,5 +101,22 @@ public class EnemiesManager : MonoBehaviour
         return false;
     }
 
+
+    public void readWords()
+    {
+        FileStream fs = new FileStream("Assets/words/words_lineByLine.txt", FileMode.Open);
+        StreamReader sr = new StreamReader(fs);
+
+        for(int i = 0; sr.Peek() != -1; i++)
+        {
+            String[] line = sr.ReadLine().Split(',');
+            for(int j = 0; j < line.Length; j++) {
+                words[i].Add(line[j]);
+            }
+        }
+
+        sr.Close();
+        fs.Close();
+    }
 }
 
