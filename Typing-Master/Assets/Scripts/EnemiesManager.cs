@@ -7,21 +7,33 @@ using System.IO;
 public class EnemiesManager : MonoBehaviour
 {
 
-    List<String> [] words= new List<string>[26];
+    List<String> [] wordsGrid = new List<string>[26];
+    static List<String> words = new List<String>();
 
+    static int dropedEnemies = 15;
 
     public GameObject enemyPrefab;
-    public Sprite[] enemySprites;
-    public static List<GameObject> enemyShips = new List<GameObject>();
-    public GameObject playerShip;
+    public static GameObject workArroundEnemyPrefab;
 
-    public void MakeRandomShip(int charRow)
+
+
+    public Sprite[] enemySprites;
+    public static Sprite[] workArroundSprites; 
+    public static List<GameObject> enemyShips = new List<GameObject>();
+
+
+    public GameObject playerShip;
+    public static GameObject workArroundPlayerShip;
+
+  
+
+    public static void MakeRandomShip(int charRow)
     {
-        int arraIdx = UnityEngine.Random.Range(0, enemySprites.Length);
-        Sprite shipSprite = enemySprites[arraIdx];
+        int arraIdx = UnityEngine.Random.Range(0, workArroundSprites.Length);
+        Sprite shipSprite = workArroundSprites[arraIdx];
         string shipName = shipSprite.name;
 
-        GameObject go = Instantiate(enemyPrefab);
+        GameObject go = Instantiate(workArroundEnemyPrefab);
         go.name = shipName;
         go.GetComponent<EnemyClass>().shipName = shipName;
 
@@ -30,18 +42,18 @@ public class EnemiesManager : MonoBehaviour
         //go.GetComponentInChildren<TextMesh>().fontSize = 7;
         go.GetComponentInChildren<MeshRenderer>().sortingLayerName = "Player";
         go.GetComponentInChildren<MeshRenderer>().sortingOrder = 50;
-        go.GetComponentInChildren<TextMesh>().text = words[charRow][0];
+        go.GetComponentInChildren<TextMesh>().text = words[charRow];
         //go.GetComponentInChildren<TextMesh>().transform.rotation
 
         go.GetComponent<SpriteRenderer>().transform.position = new Vector2(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(4.5f, 10f));
 
         go.GetComponent<SpriteRenderer>().sprite = shipSprite;
         float xSpeed = 0;
-        if (go.transform.position.x < playerShip.transform.position.x)
+        if (go.transform.position.x < workArroundPlayerShip.transform.position.x)
         {
             xSpeed = 0.1f;
         }
-        if (go.transform.position.x > playerShip.transform.position.x)
+        if (go.transform.position.x > workArroundPlayerShip.transform.position.x)
         {
             xSpeed = -0.1f;
         }
@@ -52,12 +64,19 @@ public class EnemiesManager : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < 26; i++)
+
+        for (int i = 0; i < 26; i++)
         {
-            words[i] = new List<string>();
+            wordsGrid[i] = new List<string>();
         }
-       readWords();
-        for(int i = 0; i < 15; i++)
+
+        readWords();
+
+        workArroundSprites = enemySprites;
+        workArroundPlayerShip = playerShip;
+        workArroundEnemyPrefab = enemyPrefab;
+
+        for (int i = 0; i < dropedEnemies; i++)
         {
             MakeRandomShip(i);
         }
@@ -95,6 +114,13 @@ public class EnemiesManager : MonoBehaviour
             go.GetComponentInChildren<TextMesh>().text = "=_=";
             Destroy(go, 2f);
             enemyShips.Remove(go);
+            Debug.Log(enemyShips.Count);
+
+            EnemiesManager.MakeRandomShip(dropedEnemies++);
+            EnemiesManager.MakeRandomShip(dropedEnemies++);
+
+            Debug.Log(enemyShips.Count);
+
             return true;
         }
         go.GetComponentInChildren<TextMesh>().text = go.GetComponentInChildren<TextMesh>().text.Substring(1);
@@ -107,16 +133,33 @@ public class EnemiesManager : MonoBehaviour
         FileStream fs = new FileStream("Assets/words/words_lineByLine.txt", FileMode.Open);
         StreamReader sr = new StreamReader(fs);
 
-        for(int i = 0; sr.Peek() != -1; i++)
+        for (int i = 0; sr.Peek() != -1; i++)
         {
             String[] line = sr.ReadLine().Split(',');
-            for(int j = 0; j < line.Length; j++) {
-                words[i].Add(line[j]);
+            for (int j = 0; j < line.Length; j++)
+            {
+                wordsGrid[i].Add(line[j]);
             }
+        }
+
+        for (int j = 0; true; j++)
+        {
+            bool toBreak = true;
+            for (int i = 0; i < wordsGrid.Length; i++)
+            {
+                if (j >= wordsGrid[i].Count)
+                    continue;
+                words.Add(wordsGrid[i][j]);
+                toBreak = false;
+            }
+            if (toBreak == true)
+                break;
         }
 
         sr.Close();
         fs.Close();
+
+
     }
 }
 
