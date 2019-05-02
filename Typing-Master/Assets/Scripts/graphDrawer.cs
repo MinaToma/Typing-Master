@@ -13,12 +13,28 @@ public class graphDrawer : MonoBehaviour
     [SerializeField] static private Sprite circleSprite;
     static private RectTransform graphContainer;
     public static List<int> value = new List<int>();
+    public static string PlayerName;
+
 
 
     public void Awake()
     {
+        loadScore();
         graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
         showGraph(value, 1, 1, 1);
+    }
+    public void loadScore()
+    {
+        FileStream fs = new FileStream("Files/Player.txt", FileMode.Open);
+        StreamReader sr = new StreamReader(fs);
+        PlayerName = sr.ReadLine();
+        string Name = "Files/" + PlayerName;
+        Name += ".txt";
+        sr.Close();
+        fs.Close();
+
+        addScoreToList(Name);
+
     }
 
     public static void addScoreToList(string fileName)
@@ -35,11 +51,12 @@ public class graphDrawer : MonoBehaviour
             sr.Close();
         }
     }
-    static private GameObject createCircle(Vector2 anchoredPosition)
+    static private GameObject createCircle(Vector2 anchoredPosition, float r, float g, float b)
     {
         GameObject gameObject = new GameObject("circle", typeof(Image));
         gameObject.transform.SetParent(graphContainer, false);
         gameObject.GetComponent<Image>().sprite = circleSprite;
+        gameObject.GetComponent<Image>().color = new Color(r, g, b, 0.5f);
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = anchoredPosition;
         rectTransform.sizeDelta = new Vector2(11, 11);
@@ -51,7 +68,7 @@ public class graphDrawer : MonoBehaviour
     static public void showGraph(List<int> valueList, float r, float g, float b)
     {
         float graphHeight = graphContainer.sizeDelta.y;
-        float yMax = 100;
+        float yMax = 30;
         float xSize = 50f;
 
         GameObject prevDot = null;
@@ -59,10 +76,10 @@ public class graphDrawer : MonoBehaviour
         {
             float xPosition = xSize + i * xSize;
             float yPosition = valueList[i] / yMax * graphHeight;
-            GameObject curDot = createCircle(new Vector2(xPosition, yPosition));
+            GameObject curDot = createCircle(new Vector2(xPosition, yPosition), r, g, b);
             if (prevDot != null)
             {
-                createConnection(prevDot.GetComponent<RectTransform>().anchoredPosition, curDot.GetComponent<RectTransform>().anchoredPosition, 1, 1, 1);
+                createConnection(prevDot.GetComponent<RectTransform>().anchoredPosition, curDot.GetComponent<RectTransform>().anchoredPosition, r, g, b);
             }
             prevDot = curDot;
         }
@@ -72,7 +89,7 @@ public class graphDrawer : MonoBehaviour
     {
         GameObject gameObject = new GameObject("dotConnection", typeof(Image));
         gameObject.transform.SetParent(graphContainer, false);
-        gameObject.GetComponent<Image>().color = new Color(r, g, b, 0.5f);
+        gameObject.GetComponent<Image>().color = new Color(r,g,b, 0.5f);
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
         Vector2 dir = (dotPositionB - dotPositionA).normalized;
         float distance = Vector2.Distance(dotPositionA, dotPositionB);

@@ -12,9 +12,9 @@ public class playerController : MonoBehaviour {
     public Transform ship;
     public float angle;
     private GameObject target = null;
-    private static Stopwatch timer;
-    private static int correctStrokes, totalStrokes;
-    private static int avgWPM ;
+    private  Stopwatch timer;
+    private  int correctStrokes, totalStrokes;
+    private  int avgWPM ;
     private bool startTime;
 
     void Start ()
@@ -110,7 +110,7 @@ public class playerController : MonoBehaviour {
         Quaternion rotation = Quaternion.LookRotation(Vector3.forward, offset);
         ship.rotation = rotation;
     }
-    private static int wpm()
+    private int wpm()
     {
         return (int)Math.Round(((correctStrokes / 5.0) / (timer.ElapsedMilliseconds / 60000.0)) * ((double)correctStrokes / totalStrokes));
     }

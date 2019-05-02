@@ -45,7 +45,7 @@ public class EnemiesManager : MonoBehaviour
         go.GetComponentInChildren<TextMesh>().text = words[charRow];
         //go.GetComponentInChildren<TextMesh>().transform.rotation
 
-        go.GetComponent<SpriteRenderer>().transform.position = new Vector2(UnityEngine.Random.Range(-8, 8), UnityEngine.Random.Range(4.5f, 10f));
+        go.GetComponent<SpriteRenderer>().transform.position = new Vector2(UnityEngine.Random.Range(-6, 6), UnityEngine.Random.Range(4.5f, 8f));
 
         go.GetComponent<SpriteRenderer>().sprite = shipSprite;
         float xSpeed = 0;
@@ -65,6 +65,17 @@ public class EnemiesManager : MonoBehaviour
     void Start()
     {
 
+        wordsGrid = new List<string>[26];
+        words = new List<String>();
+
+         dropedEnemies = 6;
+
+ 
+
+
+
+
+         enemyShips = new List<GameObject>();
         for (int i = 0; i < 26; i++)
         {
             wordsGrid[i] = new List<string>();
@@ -109,14 +120,16 @@ public class EnemiesManager : MonoBehaviour
 
     static public bool hit(GameObject go)
     {
+        
         if (go.GetComponentInChildren<TextMesh>().text.Length == 1)
         {
             go.GetComponentInChildren<TextMesh>().text = "=_=";
             Destroy(go, 2f);
             enemyShips.Remove(go);
             //Debug.Log(enemyShips.Count);
-
+            if(enemyShips.Count < 12)
             EnemiesManager.MakeRandomShip(dropedEnemies++);
+
             EnemiesManager.MakeRandomShip(dropedEnemies++);
 
             //Debug.Log(enemyShips.Count);

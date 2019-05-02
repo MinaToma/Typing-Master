@@ -125,6 +125,11 @@ public class Register : MonoBehaviour {
             Sw.WriteLine(form);
             Sw.Close();
             fs.Close();
+            fs = new FileStream("Files/playerNames.txt", FileMode.Append);
+            Sw = new StreamWriter(fs);
+            Sw.WriteLine(Username);
+            Sw.Close();
+            fs.Close();
 
             username.GetComponent<InputField>().text = "";
              email.GetComponent<InputField>().text = "";
