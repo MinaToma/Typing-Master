@@ -66,6 +66,10 @@ public class playerController : MonoBehaviour {
                             Vector3 shotPos = ship.position;
                             shotPos.y += 0.5f;
                             target = go;
+
+                            TextMesh textmesh = target.GetComponentInChildren<TextMesh>();
+                            textmesh.color = Color.yellow;
+
                             rotate();
 
 
@@ -87,6 +91,9 @@ public class playerController : MonoBehaviour {
                     Vector3 shotPos = ship.position;
                     shotPos.y += 0.5f;
                     rotate();
+
+                    TextMesh textmesh = target.GetComponentInChildren<TextMesh>();
+                    textmesh.color = Color.yellow;
 
                     GameObject shotObj = Instantiate(shot, shotPos, ship.rotation);
 
