@@ -120,9 +120,13 @@ public class Register : MonoBehaviour {
             }
             form = (Username + "$" + Email + "$" + Password);
             
-            File.WriteAllText("Files/" + Username + ".txt", form);
+            FileStream fs = new FileStream("Files/" + Username + ".txt", FileMode.Create);
+            StreamWriter Sw = new StreamWriter(fs);
+            Sw.WriteLine(form);
+            Sw.Close();
+            fs.Close();
 
-             username.GetComponent<InputField>().text = "";
+            username.GetComponent<InputField>().text = "";
              email.GetComponent<InputField>().text = "";
              password.GetComponent<InputField>().text = "";
              confPassword.GetComponent<InputField>().text = "";

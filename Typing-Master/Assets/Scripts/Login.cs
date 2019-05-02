@@ -78,7 +78,8 @@ public class Login : MonoBehaviour {
 
         if(PS == true && UN == true)
         {
-             username.GetComponent<InputField>().text = "";
+            File.WriteAllText("Files/Player.txt", Username );
+            username.GetComponent<InputField>().text = "";
              password.GetComponent<InputField>().text = "";
             print("Login Successfull");
             SceneManager.LoadScene("MainWindow");

@@ -10,7 +10,7 @@ public class EnemiesManager : MonoBehaviour
     List<String> [] wordsGrid = new List<string>[26];
     static List<String> words = new List<String>();
 
-    static int dropedEnemies = 15;
+    static int dropedEnemies = 4;
 
     public GameObject enemyPrefab;
     public static GameObject workArroundEnemyPrefab;
@@ -114,12 +114,12 @@ public class EnemiesManager : MonoBehaviour
             go.GetComponentInChildren<TextMesh>().text = "=_=";
             Destroy(go, 2f);
             enemyShips.Remove(go);
-            Debug.Log(enemyShips.Count);
+            //Debug.Log(enemyShips.Count);
 
             EnemiesManager.MakeRandomShip(dropedEnemies++);
             EnemiesManager.MakeRandomShip(dropedEnemies++);
 
-            Debug.Log(enemyShips.Count);
+            //Debug.Log(enemyShips.Count);
 
             return true;
         }

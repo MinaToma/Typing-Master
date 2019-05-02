@@ -3,37 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class graphDrawer : MonoBehaviour {
+using System.IO;
+public class graphDrawer : MonoBehaviour
+{
 
     //load data from file
     //fill graph
 
-    [SerializeField] private Sprite circleSprite;
-    private RectTransform graphContainer;
-    List<int> value = new List<int>() { 5, 10, 21, 34 , 100 , 200 };
+    [SerializeField] static private Sprite circleSprite;
+    static private RectTransform graphContainer;
+    public static List<int> value = new List<int>();
+
 
     public void Awake()
     {
         graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
-        showGraph(value);
+        showGraph(value, 1, 1, 1);
     }
 
-    public GameObject createCircle(Vector2 anchoredPosition)
+    public static void addScoreToList(string fileName)
     {
-        GameObject gameObject = new GameObject("circle" , typeof(Image));
-        gameObject.transform.SetParent(graphContainer , false);
+        value.Clear();
+        using (var sr = new StreamReader(fileName))
+        {
+            for (int i = 0; sr.Peek() != -1; i++)
+            {
+                string score = sr.ReadLine();
+                if (i != 0)
+                    value.Add(Int32.Parse(score));
+            }
+            sr.Close();
+        }
+    }
+    static private GameObject createCircle(Vector2 anchoredPosition)
+    {
+        GameObject gameObject = new GameObject("circle", typeof(Image));
+        gameObject.transform.SetParent(graphContainer, false);
         gameObject.GetComponent<Image>().sprite = circleSprite;
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = anchoredPosition;
-        rectTransform.sizeDelta = new Vector2(11 , 11);
+        rectTransform.sizeDelta = new Vector2(11, 11);
         rectTransform.anchorMin = new Vector2(0, 0);
         rectTransform.anchorMax = new Vector2(0, 0);
         return gameObject;
     }
 
-
-    public void showGraph(List<int> valueList)
+    static public void showGraph(List<int> valueList, float r, float g, float b)
     {
         float graphHeight = graphContainer.sizeDelta.y;
         float yMax = 100;
@@ -47,17 +62,17 @@ public class graphDrawer : MonoBehaviour {
             GameObject curDot = createCircle(new Vector2(xPosition, yPosition));
             if (prevDot != null)
             {
-                createConnection(prevDot.GetComponent<RectTransform>().anchoredPosition , curDot.GetComponent<RectTransform>().anchoredPosition);
+                createConnection(prevDot.GetComponent<RectTransform>().anchoredPosition, curDot.GetComponent<RectTransform>().anchoredPosition, 1, 1, 1);
             }
             prevDot = curDot;
         }
     }
 
-    private void createConnection(Vector2 dotPositionA , Vector2 dotPositionB)
+    static private void createConnection(Vector2 dotPositionA, Vector2 dotPositionB, float r, float g, float b)
     {
         GameObject gameObject = new GameObject("dotConnection", typeof(Image));
-        gameObject.transform.SetParent(graphContainer , false);
-        gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+        gameObject.transform.SetParent(graphContainer, false);
+        gameObject.GetComponent<Image>().color = new Color(r, g, b, 0.5f);
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
         Vector2 dir = (dotPositionB - dotPositionA).normalized;
         float distance = Vector2.Distance(dotPositionA, dotPositionB);
