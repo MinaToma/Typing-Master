@@ -133,12 +133,12 @@ public class Register : MonoBehaviour {
             password.GetComponent<InputField>().text = "";
             confPassword.GetComponent<InputField>().text = "";
 
-            EditorUtility.DisplayDialog("Successful", "Registered", "OK");
+          //  EditorUtility.DisplayDialog("Successful", "Registered", "OK");
             print("Registration complete");
         }
         else
         {
-            EditorUtility.DisplayDialog("Failed", "Check your data", "Cancel");
+         //   EditorUtility.DisplayDialog("Failed", "Check your data", "Cancel");
         }
     }
     // Update is called once per frame

@@ -6,7 +6,6 @@ using System;
 using System.Text.RegularExpressions;
 using System.IO;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 
 public class Login : MonoBehaviour {
 
@@ -86,12 +85,12 @@ public class Login : MonoBehaviour {
             username.GetComponent<InputField>().text = "";
              password.GetComponent<InputField>().text = "";
             print("Login Successfull");
-            EditorUtility.DisplayDialog("Successful", "Welcome " + Username , "Start");
+          //  EditorUtility.DisplayDialog("Successful", "Welcome " + Username , "Start");
             SceneManager.LoadScene("MainWindow");
         } 
         else
         {
-            EditorUtility.DisplayDialog("Error", "Try Again", "Close");
+          //  EditorUtility.DisplayDialog("Error", "Try Again", "Close");
         }
     }
     

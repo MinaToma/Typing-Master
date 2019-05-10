@@ -61,7 +61,6 @@ public class EnemiesManager : MonoBehaviour
         else angle = (go.transform.position.y - ship.position.y) / (go.transform.position.x - ship.position.x);
 
         double velX = Math.Sin(angle) * speed;
-        double velY = Math.Cos(angle) * speed;
 
         int dir = (go.transform.position.x < ship.transform.position.x) ? 1 : -1;
         go.GetComponent<Rigidbody2D>().velocity = new Vector2((float)Math.Abs(velX) * dir, (float)-0.3f);
@@ -92,9 +91,7 @@ public class EnemiesManager : MonoBehaviour
             MakeRandomShip(i);
         }
     }
-
-
-
+    
     void Update()
     {
        
@@ -117,7 +114,7 @@ public class EnemiesManager : MonoBehaviour
             go.GetComponentInChildren<TextMesh>().text = "=_=";
             Destroy(go, 2f);
             enemyShips.Remove(go);
-            Debug.Log(enemyShips.Count);
+
             if(enemyShips.Count <= 12)
             {
                 for(int i = 0; i < stage; i++)
