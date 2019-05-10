@@ -42,7 +42,7 @@ public class graphDrawer : MonoBehaviour
                 createConnection(prevDot.GetComponent<RectTransform>().anchoredPosition, curDot.GetComponent<RectTransform>().anchoredPosition, 1, 1, 1);
             }
             prevDot = curDot;
-            createLabel(i * 0.35f * graphContainer.sizeDelta.x, labelTemplateY.position.y , (i + 1).ToString());
+            createLabel(i * 0.35f * graphContainer.sizeDelta.x, -15 , i.ToString());
         }
     }
 
@@ -50,7 +50,7 @@ public class graphDrawer : MonoBehaviour
     void createYAxis()
     {
         GameObject prevDot = null;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 11; i++)
         {
             GameObject curDot = createCircle(new Vector2(0, i * 0.35f * graphContainer.sizeDelta.y), 1, 1, 1);
             if (prevDot != null)
@@ -59,7 +59,7 @@ public class graphDrawer : MonoBehaviour
             }
             prevDot = curDot;
 
-            createLabel(labelTemplateY.position.x, i * 0.35f * graphContainer.sizeDelta.y, (10 * i).ToString());
+            createLabel(-30 , i * 0.35f * graphContainer.sizeDelta.y + 5 , (10 * i).ToString());
         }
     }
 

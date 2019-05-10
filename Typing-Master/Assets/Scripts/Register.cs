@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using System;
 using System.Text.RegularExpressions;
 using System.IO;
+using UnityEditor;
+
 public class Register : MonoBehaviour {
 
     public GameObject username;
@@ -16,14 +18,9 @@ public class Register : MonoBehaviour {
     private string Email;
     private string ConfPassword;
     private string form;
-    private bool EmailVaild = false;
-
-
-
 
     // Use this for initialization
     void Start () {
-
        
     }
 	
@@ -132,15 +129,17 @@ public class Register : MonoBehaviour {
             fs.Close();
 
             username.GetComponent<InputField>().text = "";
-             email.GetComponent<InputField>().text = "";
-             password.GetComponent<InputField>().text = "";
-             confPassword.GetComponent<InputField>().text = "";
+            email.GetComponent<InputField>().text = "";
+            password.GetComponent<InputField>().text = "";
+            confPassword.GetComponent<InputField>().text = "";
+
+            EditorUtility.DisplayDialog("Successful", "Registered", "OK");
             print("Registration complete");
         }
-
-
-
-
+        else
+        {
+            EditorUtility.DisplayDialog("Failed", "Check your data", "Cancel");
+        }
     }
     // Update is called once per frame
     void Update() {
@@ -163,14 +162,12 @@ public class Register : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            RegisterButton();
-           
+            RegisterButton();   
         }
 
         Username = username.GetComponent<InputField>().text;
         Email = email.GetComponent<InputField>().text;
         Password = password.GetComponent<InputField>().text;
         ConfPassword = confPassword.GetComponent<InputField>().text;
-
     }
 }

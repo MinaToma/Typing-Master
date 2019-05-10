@@ -21,7 +21,7 @@ public class Leaderboard : MonoBehaviour{
                     string playerName = sr.ReadLine();
                     if (playerName.Equals(graphDrawer.PlayerName)) continue;
                     graphDrawer.addScoreToList("Files/" + playerName + ".txt");
-                    graphDrawer.showGraph(graphDrawer.value, UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+                    graphDrawer.showGraph(graphDrawer.value, UnityEngine.Random.Range(0.1f, 0.99f), UnityEngine.Random.Range(0.1f, 0.99f), UnityEngine.Random.Range(0.1f, 0.99f));
                 }
                 sr.Close();
             }

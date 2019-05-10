@@ -25,9 +25,6 @@ public class playerController : MonoBehaviour {
         startTime = false;
     }
 
-
-    
-
     void Update ()
     {
 
@@ -37,9 +34,10 @@ public class playerController : MonoBehaviour {
             {
                 startTime = true;
                 timer.Start();
-               
             }
-            if(go.transform.position.y<-2)
+
+            double dist = Math.Sqrt((go.transform.position.x - ship.position.x) * (go.transform.position.x - ship.position.x) + (go.transform.position.y - ship.position.y) * (go.transform.position.y - ship.position.y) );
+            if (dist <= 1)
             {
                 die();
                 break;
@@ -52,15 +50,13 @@ public class playerController : MonoBehaviour {
             {
                 string key = vKey.ToString();
                 key = key.ToLower();
-                //UnityEngine.Debug.Log(key);
               
                 if (target == null)
                 {
                     foreach(GameObject go in EnemiesManager.enemyShips)
                      {
                        
-                       // UnityEngine.Debug.Log((go.GetComponentInChildren<TextMesh>().text[0]));
-                        if(key[0].Equals(go.GetComponentInChildren<TextMesh>().text[0]) && go.transform.position.y < 4.5 && go.transform.position.y > -2)
+                        if(key[0].Equals(go.GetComponentInChildren<TextMesh>().text[0]) && go.transform.position.y < 4.5)
                         {
                             
                             Vector3 shotPos = ship.position;
@@ -103,8 +99,7 @@ public class playerController : MonoBehaviour {
                         target = null;
                 }
                 totalStrokes++;
-                avgWPM += wpm();
-
+                     avgWPM += wpm();
             }
         }
     }
@@ -131,12 +126,14 @@ public class playerController : MonoBehaviour {
         print(playerName);
         sr.Close();
         fs.Close();
-        exportScore((avgWPM / totalStrokes), playerName);
+        if (totalStrokes != 0)
+            exportScore((int)Math.Ceiling((avgWPM / totalStrokes) * 1.5f) , playerName);
+        else exportScore(0, playerName);
         SceneManager.LoadScene("MainWindow");
     }
 
     void exportScore(int score, string fileName)
-    {
+    {   
         FileStream fs = new FileStream(fileName, FileMode.Append);
         StreamWriter Sw = new StreamWriter(fs);
         Sw.WriteLine(score);
