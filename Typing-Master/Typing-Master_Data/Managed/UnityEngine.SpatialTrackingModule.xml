@@ -2,7 +2,7 @@
 <doc>
   <members>
     <assembly>
-      <name>UnityEngine.ProfilerModule</name>
+      <name>UnityEngine.SpatialTrackingModule</name>
     </assembly>
   </members>
 </doc>

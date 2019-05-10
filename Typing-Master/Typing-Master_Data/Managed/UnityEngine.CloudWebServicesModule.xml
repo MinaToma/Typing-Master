@@ -2,7 +2,7 @@
 <doc>
   <members>
     <assembly>
-      <name>UnityEngine.UnityTestProtocolModule</name>
+      <name>UnityEngine.CloudWebServicesModule</name>
     </assembly>
   </members>
 </doc>

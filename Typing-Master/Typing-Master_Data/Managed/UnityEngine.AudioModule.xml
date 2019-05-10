@@ -126,21 +126,6 @@
         <para>Update the AudioMixer with unscaled realtime.</para>
       </summary>
     </member>
-    <member name="T:UnityEngine.Audio.AudioPlayableBinding">
-      <summary>
-        <para>A PlayableBinding that contains information representing an AudioPlayableOutput.</para>
-      </summary>
-    </member>
-    <member name="M:UnityEngine.Audio.AudioPlayableBinding.Create(System.String,UnityEngine.Object)">
-      <summary>
-        <para>Creates a PlayableBinding that contains information representing an AudioPlayableOutput.</para>
-      </summary>
-      <param name="key">A reference to a UnityEngine.Object that acts as a key for this binding.</param>
-      <param name="name">The name of the AudioPlayableOutput.</param>
-      <returns>
-        <para>Returns a PlayableBinding that contains information that is used to create an AudioPlayableOutput.</para>
-      </returns>
-    </member>
     <member name="T:UnityEngine.Audio.AudioPlayableOutput">
       <summary>
         <para>A IPlayableOutput implementation that will be used to play audio.</para>
@@ -157,24 +142,10 @@
         <para>A new AudioPlayableOutput attached to the PlayableGraph.</para>
       </returns>
     </member>
-    <member name="M:UnityEngine.Audio.AudioPlayableOutput.GetEvaluateOnSeek">
-      <summary>
-        <para>Gets the state of output playback when seeking.</para>
-      </summary>
-      <returns>
-        <para>Returns true if the output plays when seeking. Returns false otherwise.</para>
-      </returns>
-    </member>
     <member name="P:UnityEngine.Audio.AudioPlayableOutput.Null">
       <summary>
         <para>Returns an invalid AudioPlayableOutput.</para>
       </summary>
-    </member>
-    <member name="M:UnityEngine.Audio.AudioPlayableOutput.SetEvaluateOnSeek(System.Boolean)">
-      <summary>
-        <para>Controls whether the output should play when seeking.</para>
-      </summary>
-      <param name="value">Set to true to play the output when seeking. Set to false to disable audio scrubbing on this output. Default is true.</param>
     </member>
     <member name="T:UnityEngine.AudioChorusFilter">
       <summary>
@@ -729,27 +700,27 @@
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.dryLevel">
       <summary>
-        <para>Mix level of dry signal in output in millibels (mB). Ranges from -10000.0 to 0.0. Default is 0.</para>
+        <para>Mix level of dry signal in output in mB. Ranges from -10000.0 to 0.0. Default is 0.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.hfReference">
       <summary>
-        <para>Reference high frequency in hertz (Hz). Ranges from 1000.0 to 20000.0. Default is 5000.0.</para>
+        <para>Reference high frequency in Hz. Ranges from 20.0 to 20000.0. Default is 5000.0.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.lfReference">
       <summary>
-        <para>Reference low-frequency in hertz (Hz). Ranges from 20.0 to 1000.0. Default is 250.0.</para>
+        <para>Reference low-frequency in Hz. Ranges from 20.0 to 1000.0. Default is 250.0.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.reflectionsDelay">
       <summary>
-        <para>Late reverberation level relative to room effect in millibels (mB). Ranges from -10000.0 to 2000.0. Default is 0.0.</para>
+        <para>Late reverberation level relative to room effect in mB. Ranges from -10000.0 to 2000.0. Default is 0.0.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.reflectionsLevel">
       <summary>
-        <para>Early reflections level relative to room effect in millibels (mB). Ranges from -10000.0 to 1000.0. Default is -10000.0.</para>
+        <para>Early reflections level relative to room effect in mB. Ranges from -10000.0 to 1000.0. Default is -10000.0.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.reverbDelay">
@@ -759,7 +730,7 @@
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.reverbLevel">
       <summary>
-        <para>Late reverberation level relative to room effect in millibels (mB). Ranges from -10000.0 to 2000.0. Default is 0.0.</para>
+        <para>Late reverberation level relative to room effect in mB. Ranges from -10000.0 to 2000.0. Default is 0.0.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.reverbPreset">
@@ -769,17 +740,17 @@
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.room">
       <summary>
-        <para>Room effect level at low frequencies in millibels (mB). Ranges from -10000.0 to 0.0. Default is 0.0.</para>
+        <para>Room effect level at low frequencies in mB. Ranges from -10000.0 to 0.0. Default is 0.0.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.roomHF">
       <summary>
-        <para>Room effect high-frequency level re. low frequency level in millibels (mB). Ranges from -10000.0 to 0.0. Default is 0.0.</para>
+        <para>Room effect high-frequency level re. low frequency level in mB. Ranges from -10000.0 to 0.0. Default is 0.0.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AudioReverbFilter.roomLF">
       <summary>
-        <para>Room effect low-frequency level in millibels (mB). Ranges from -10000.0 to 0.0. Default is 0.0.</para>
+        <para>Room effect low-frequency level in mB. Ranges from -10000.0 to 0.0. Default is 0.0.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.AudioReverbPreset">
@@ -929,7 +900,7 @@
     </member>
     <member name="T:UnityEngine.AudioReverbZone">
       <summary>
-        <para>Reverb Zones are used when you want to create location based ambient effects in the Scene.</para>
+        <para>Reverb Zones are used when you want to create location based ambient effects in the scene.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.AudioReverbZone.decayHFRatio">
@@ -1317,15 +1288,15 @@
     </member>
     <member name="M:UnityEngine.AudioSource.Play()">
       <summary>
-        <para>Plays the clip.</para>
+        <para>Plays the clip with an optional certain delay.</para>
       </summary>
-      <param name="delay">Deprecated. Delay in number of samples, assuming a 44100Hz sample rate (meaning that Play(44100) will delay the playing by exactly 1 sec).</param>
+      <param name="delay">Delay in number of samples, assuming a 44100Hz sample rate (meaning that Play(44100) will delay the playing by exactly 1 sec).</param>
     </member>
     <member name="M:UnityEngine.AudioSource.Play(System.UInt64)">
       <summary>
-        <para>Plays the clip.</para>
+        <para>Plays the clip with an optional certain delay.</para>
       </summary>
-      <param name="delay">Deprecated. Delay in number of samples, assuming a 44100Hz sample rate (meaning that Play(44100) will delay the playing by exactly 1 sec).</param>
+      <param name="delay">Delay in number of samples, assuming a 44100Hz sample rate (meaning that Play(44100) will delay the playing by exactly 1 sec).</param>
     </member>
     <member name="M:UnityEngine.AudioSource.PlayClipAtPoint(UnityEngine.AudioClip,UnityEngine.Vector3)">
       <summary>
@@ -1495,17 +1466,17 @@
     </member>
     <member name="F:UnityEngine.AudioVelocityUpdateMode.Auto">
       <summary>
-        <para>Updates the source or listener in the MonoBehaviour.FixedUpdate loop if it is attached to a Rigidbody, dynamic MonoBehaviour.Update otherwise.</para>
+        <para>Updates the source or listener in the fixed update loop if it is attached to a Rigidbody, dynamic otherwise.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.AudioVelocityUpdateMode.Dynamic">
       <summary>
-        <para>Updates the source or listener in the dynamic MonoBehaviour.Update loop.</para>
+        <para>Updates the source or listener in the dynamic update loop.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.AudioVelocityUpdateMode.Fixed">
       <summary>
-        <para>Updates the source or listener in the MonoBehaviour.FixedUpdate loop.</para>
+        <para>Updates the source or listener in the fixed update loop.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.Experimental.Audio.AudioSampleProvider">
@@ -1736,47 +1707,47 @@
     </member>
     <member name="T:UnityEngine.MovieTexture">
       <summary>
-        <para>MovieTexture has been deprecated. Refer to the new movie playback solution VideoPlayer.</para>
+        <para>Movie Textures are textures onto which movies are played back.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.MovieTexture.audioClip">
       <summary>
-        <para>MovieTexture has been deprecated. Refer to the new movie playback solution VideoPlayer.</para>
+        <para>Returns the AudioClip belonging to the MovieTexture.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.MovieTexture.duration">
       <summary>
-        <para>MovieTexture has been deprecated. Refer to the new movie playback solution VideoPlayer.</para>
+        <para>The time, in seconds, that the movie takes to play back completely.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.MovieTexture.isPlaying">
       <summary>
-        <para>MovieTexture has been deprecated. Refer to the new movie playback solution VideoPlayer.</para>
+        <para>Returns whether the movie is playing or not.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.MovieTexture.isReadyToPlay">
       <summary>
-        <para>MovieTexture has been deprecated. Refer to the new movie playback solution VideoPlayer.</para>
+        <para>If the movie is downloading from a web site, this returns if enough data has been downloaded so playback should be able to start without interruptions.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.MovieTexture.loop">
       <summary>
-        <para>MovieTexture has been deprecated. Refer to the new movie playback solution VideoPlayer.</para>
+        <para>Set this to true to make the movie loop.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.MovieTexture.Pause">
       <summary>
-        <para>MovieTexture has been deprecated. Refer to the new movie playback solution VideoPlayer.</para>
+        <para>Pauses playing the movie.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.MovieTexture.Play">
       <summary>
-        <para>MovieTexture has been deprecated. Refer to the new movie playback solution VideoPlayer.</para>
+        <para>Starts playing the movie.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.MovieTexture.Stop">
       <summary>
-        <para>MovieTexture has been deprecated. Refer to the new movie playback solution VideoPlayer.</para>
+        <para>Stops playing the movie, and rewinds it to the beginning.</para>
       </summary>
     </member>
     <member name="A:UnityEngine.AudioModule">
@@ -1789,29 +1760,9 @@
         <para>A structure describing the webcam device.</para>
       </summary>
     </member>
-    <member name="P:UnityEngine.WebCamDevice.availableResolutions">
-      <summary>
-        <para>Possible WebCamTexture resolutions for this device.</para>
-      </summary>
-    </member>
-    <member name="P:UnityEngine.WebCamDevice.depthCameraName">
-      <summary>
-        <para>A string identifier used to create a depth data based WebCamTexture.</para>
-      </summary>
-    </member>
-    <member name="P:UnityEngine.WebCamDevice.isAutoFocusPointSupported">
-      <summary>
-        <para>Returns true if the camera supports automatic focusing on points of interest and false otherwise.</para>
-      </summary>
-    </member>
     <member name="P:UnityEngine.WebCamDevice.isFrontFacing">
       <summary>
         <para>True if camera faces the same direction a screen does, false otherwise.</para>
-      </summary>
-    </member>
-    <member name="P:UnityEngine.WebCamDevice.kind">
-      <summary>
-        <para>Property of type WebCamKind denoting the kind of webcam device.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.WebCamDevice.name">
@@ -1819,34 +1770,9 @@
         <para>A human-readable name of the device. Varies across different systems.</para>
       </summary>
     </member>
-    <member name="T:UnityEngine.WebCamKind">
-      <summary>
-        <para>Enum representing the different types of web camera device.</para>
-      </summary>
-    </member>
-    <member name="F:UnityEngine.WebCamKind.ColorAndDepth">
-      <summary>
-        <para>Camera which supports synchronized color and depth data (currently these are only dual back and true depth cameras on latest iOS devices).</para>
-      </summary>
-    </member>
-    <member name="F:UnityEngine.WebCamKind.Telephoto">
-      <summary>
-        <para>A Telephoto camera device. These devices have a longer focal length than a wide-angle camera.</para>
-      </summary>
-    </member>
-    <member name="F:UnityEngine.WebCamKind.WideAngle">
-      <summary>
-        <para>Wide angle (default) camera.</para>
-      </summary>
-    </member>
     <member name="T:UnityEngine.WebCamTexture">
       <summary>
         <para>WebCam Textures are textures onto which the live video input is rendered.</para>
-      </summary>
-    </member>
-    <member name="P:UnityEngine.WebCamTexture.autoFocusPoint">
-      <summary>
-        <para>This property allows you to set/get the auto focus point of the camera. This works only on Android and iOS devices.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.WebCamTexture.deviceName">
@@ -1862,11 +1788,6 @@
     <member name="P:UnityEngine.WebCamTexture.didUpdateThisFrame">
       <summary>
         <para>Did the video buffer update this frame?</para>
-      </summary>
-    </member>
-    <member name="P:UnityEngine.WebCamTexture.isDepth">
-      <summary>
-        <para>This property is true if the texture is based on depth data.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.WebCamTexture.isPlaying">

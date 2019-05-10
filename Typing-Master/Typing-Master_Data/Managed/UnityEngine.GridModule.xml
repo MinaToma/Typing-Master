@@ -97,21 +97,6 @@
         <para>The layout of the GridLayout.</para>
       </summary>
     </member>
-    <member name="F:UnityEngine.GridLayout.CellLayout.Hexagon">
-      <summary>
-        <para>Hexagonal layout for cells in the GridLayout.</para>
-      </summary>
-    </member>
-    <member name="F:UnityEngine.GridLayout.CellLayout.Isometric">
-      <summary>
-        <para>Isometric layout for cells in the GridLayout.</para>
-      </summary>
-    </member>
-    <member name="F:UnityEngine.GridLayout.CellLayout.IsometricZAsY">
-      <summary>
-        <para>Isometric layout for cells in the GridLayout where any Z cell value set will be added as a Y value.</para>
-      </summary>
-    </member>
     <member name="F:UnityEngine.GridLayout.CellLayout.Rectangle">
       <summary>
         <para>Rectangular layout for cells in the GridLayout.</para>
@@ -183,19 +168,10 @@
       <summary>
         <para>Returns the local bounds for a cell at the location.</para>
       </summary>
-      <param name="cellPosition">Location of the cell.</param>
+      <param name="localPosition">Location of the cell.</param>
+      <param name="cellPosition"></param>
       <returns>
-        <para>Local bounds of cell at the location.</para>
-      </returns>
-    </member>
-    <member name="M:UnityEngine.GridLayout.GetBoundsLocal(UnityEngine.Vector3,UnityEngine.Vector3)">
-      <summary>
-        <para>Returns the local bounds for the groups of cells at the location.</para>
-      </summary>
-      <param name="origin">Origin of the group of cells.</param>
-      <param name="size">Size of the group of cells.</param>
-      <returns>
-        <para>Local bounds of the group of cells at the location.</para>
+        <para>Local bounds of cell at the position.</para>
       </returns>
     </member>
     <member name="M:UnityEngine.GridLayout.GetLayoutCellCenter">

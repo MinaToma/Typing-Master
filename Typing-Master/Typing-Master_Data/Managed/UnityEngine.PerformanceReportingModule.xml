@@ -14,10 +14,5 @@
         <para>Controls whether the Performance Reporting service is enabled at runtime.</para>
       </summary>
     </member>
-    <member name="P:UnityEngine.Analytics.PerformanceReporting.graphicsInitializationFinishTime">
-      <summary>
-        <para>Time taken to initialize graphics in microseconds, measured from application startup.</para>
-      </summary>
-    </member>
   </members>
 </doc>

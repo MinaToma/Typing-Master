@@ -6,22 +6,18 @@ using UnityEngine.UI;
 using System.IO;
 public class graphDrawer : MonoBehaviour
 {
-
-    //load data from file
-    //fill graph
-
     [SerializeField] static private Sprite circleSprite;
     static private RectTransform graphContainer;
     public static List<int> value = new List<int>();
     public static string PlayerName;
 
-
-
+    
     public void Awake()
     {
         loadScore();
         graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
         showGraph(value, 1, 1, 1);
+        createYAxis();
     }
     public void loadScore()
     {
@@ -35,6 +31,26 @@ public class graphDrawer : MonoBehaviour
 
         addScoreToList(Name);
 
+    }
+
+    void createYAxis()
+    {
+        float graphHeight = graphContainer.sizeDelta.y;
+        float yMax = 30;
+
+        GameObject prevDot = null;
+        for (int i = 0; i <= graphHeight; i++)
+        {
+            if(i % 5 == 0)
+            {
+                GameObject curDot = createCircle(new Vector2(0, i), 1, 1, 1);
+                if (prevDot != null)
+                {
+                    createConnection(prevDot.GetComponent<RectTransform>().anchoredPosition, curDot.GetComponent<RectTransform>().anchoredPosition, 1, 1, 1);
+                }
+                prevDot = curDot;
+            }
+        }
     }
 
     public static void addScoreToList(string fileName)

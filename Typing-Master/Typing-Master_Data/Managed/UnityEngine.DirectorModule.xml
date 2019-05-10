@@ -4,6 +4,26 @@
     <assembly>
       <name>UnityEngine.DirectorModule</name>
     </assembly>
+    <member name="T:UnityEngine.Playables.DirectorWrapMode">
+      <summary>
+        <para>Wrap mode for Playables.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Playables.DirectorWrapMode.Hold">
+      <summary>
+        <para>Hold the last frame when the playable time reaches it's duration.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Playables.DirectorWrapMode.Loop">
+      <summary>
+        <para>Loop back to zero time and continue playing.</para>
+      </summary>
+    </member>
+    <member name="F:UnityEngine.Playables.DirectorWrapMode.None">
+      <summary>
+        <para>Do not keep playing when the time reaches the duration.</para>
+      </summary>
+    </member>
     <member name="T:UnityEngine.Playables.PlayableDirector">
       <summary>
         <para>Instantiates a PlayableAsset and controls playback of Playable objects.</para>
@@ -72,12 +92,6 @@
         <para>Controls how time is incremented when playing back.</para>
       </summary>
     </member>
-    <member name="M:UnityEngine.Playables.PlayableDirector.ClearGenericBinding(UnityEngine.Object)">
-      <summary>
-        <para>Clears the binding of a reference object.</para>
-      </summary>
-      <param name="key">The source object in the PlayableBinding.</param>
-    </member>
     <member name="M:UnityEngine.Playables.PlayableDirector.ClearReferenceValue(UnityEngine.PropertyName)">
       <summary>
         <para>Clears an exposed reference value.</para>
@@ -133,11 +147,6 @@
       <param name="asset">An asset to instantiate a playable from.</param>
       <param name="mode">What to do when the time passes the duration of the playable.</param>
     </member>
-    <member name="M:UnityEngine.Playables.PlayableDirector.RebindPlayableGraphOutputs">
-      <summary>
-        <para>Rebinds each PlayableOutput of the PlayableGraph.</para>
-      </summary>
-    </member>
     <member name="M:UnityEngine.Playables.PlayableDirector.RebuildGraph">
       <summary>
         <para>Discards the existing PlayableGraph and creates a new instance.</para>
@@ -165,11 +174,6 @@
     <member name="M:UnityEngine.Playables.PlayableDirector.Stop">
       <summary>
         <para>Stops playback of the current Playable and destroys the corresponding graph.</para>
-      </summary>
-    </member>
-    <member name="A:UnityEngine.DirectorModule">
-      <summary>
-        <para>The Director module implements the PlayableDirector class.</para>
       </summary>
     </member>
   </members>

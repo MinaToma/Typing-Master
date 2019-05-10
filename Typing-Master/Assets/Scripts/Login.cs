@@ -27,7 +27,9 @@ public class Login : MonoBehaviour {
         
         bool UN = false;
         bool PS = false;
-        
+        DecryptedPass = "";
+
+
         if (Username != "")
         {
             if (File.Exists("Files/" + Username + ".txt"))
@@ -75,6 +77,7 @@ public class Login : MonoBehaviour {
         {
             Debug.LogWarning("Password field Empty");
         }
+ 
 
         if(PS == true && UN == true)
         {
@@ -83,9 +86,7 @@ public class Login : MonoBehaviour {
              password.GetComponent<InputField>().text = "";
             print("Login Successfull");
             SceneManager.LoadScene("MainWindow");
-        }
-        
-
+        } 
     }
     
 
@@ -97,19 +98,12 @@ public class Login : MonoBehaviour {
             if (username.GetComponent<InputField>().isFocused)
             {
                 password.GetComponent<InputField>().Select();
-            }
-            
+            }    
         }
         if (Input.GetKeyDown(KeyCode.Return))
-        {
-            
             LoginButton();
-            
-        }
+        
         Username = username.GetComponent<InputField>().text;
         Password = password.GetComponent<InputField>().text;
-
-
-
     }
 }
