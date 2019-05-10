@@ -10,15 +10,59 @@ public class graphDrawer : MonoBehaviour
     static private RectTransform graphContainer;
     public static List<int> value = new List<int>();
     public static string PlayerName;
+    public RectTransform labelTemplateX;
+    public RectTransform labelTemplateY;
 
-    
     public void Awake()
     {
         loadScore();
         graphContainer = transform.Find("graphContainer").GetComponent<RectTransform>();
         showGraph(value, 1, 1, 1);
         createYAxis();
+        createXAxis();
     }
+
+    void createLabel(float x, float y, string label)
+    {
+        RectTransform rectT = Instantiate(labelTemplateX);
+        rectT.SetParent(graphContainer);
+        rectT.gameObject.SetActive(true);
+        rectT.anchoredPosition = new Vector2(x, y);
+        rectT.GetComponent<Text>().text = label;
+    }
+
+    void createXAxis()
+    {
+        GameObject prevDot = null;
+        for (int i = 0; i < 21; i++)
+        {
+            GameObject curDot = createCircle(new Vector2(i * 0.35f * graphContainer.sizeDelta.x , 0), 1, 1, 1);
+            if (prevDot != null)
+            {
+                createConnection(prevDot.GetComponent<RectTransform>().anchoredPosition, curDot.GetComponent<RectTransform>().anchoredPosition, 1, 1, 1);
+            }
+            prevDot = curDot;
+            createLabel(i * 0.35f * graphContainer.sizeDelta.x, labelTemplateY.position.y , (i + 1).ToString());
+        }
+    }
+
+ 
+    void createYAxis()
+    {
+        GameObject prevDot = null;
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject curDot = createCircle(new Vector2(0, i * 0.35f * graphContainer.sizeDelta.y), 1, 1, 1);
+            if (prevDot != null)
+            {
+                createConnection(prevDot.GetComponent<RectTransform>().anchoredPosition, curDot.GetComponent<RectTransform>().anchoredPosition, 1, 1, 1);
+            }
+            prevDot = curDot;
+
+            createLabel(labelTemplateY.position.x, i * 0.35f * graphContainer.sizeDelta.y, (10 * i).ToString());
+        }
+    }
+
     public void loadScore()
     {
         FileStream fs = new FileStream("Files/Player.txt", FileMode.Open);
@@ -28,30 +72,9 @@ public class graphDrawer : MonoBehaviour
         Name += ".txt";
         sr.Close();
         fs.Close();
-
         addScoreToList(Name);
-
     }
 
-    void createYAxis()
-    {
-        float graphHeight = graphContainer.sizeDelta.y;
-        float yMax = 30;
-
-        GameObject prevDot = null;
-        for (int i = 0; i <= graphHeight; i++)
-        {
-            if(i % 5 == 0)
-            {
-                GameObject curDot = createCircle(new Vector2(0, i), 1, 1, 1);
-                if (prevDot != null)
-                {
-                    createConnection(prevDot.GetComponent<RectTransform>().anchoredPosition, curDot.GetComponent<RectTransform>().anchoredPosition, 1, 1, 1);
-                }
-                prevDot = curDot;
-            }
-        }
-    }
 
     public static void addScoreToList(string fileName)
     {
@@ -67,6 +90,7 @@ public class graphDrawer : MonoBehaviour
             sr.Close();
         }
     }
+
     static private GameObject createCircle(Vector2 anchoredPosition, float r, float g, float b)
     {
         GameObject gameObject = new GameObject("circle", typeof(Image));
@@ -75,7 +99,7 @@ public class graphDrawer : MonoBehaviour
         gameObject.GetComponent<Image>().color = new Color(r, g, b, 0.5f);
         RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = anchoredPosition;
-        rectTransform.sizeDelta = new Vector2(11, 11);
+        rectTransform.sizeDelta = new Vector2(5, 5);
         rectTransform.anchorMin = new Vector2(0, 0);
         rectTransform.anchorMax = new Vector2(0, 0);
         return gameObject;
@@ -85,12 +109,11 @@ public class graphDrawer : MonoBehaviour
     {
         float graphHeight = graphContainer.sizeDelta.y;
         float yMax = 30;
-        float xSize = 50f;
-
+        
         GameObject prevDot = null;
         for (int i = 0; i < valueList.Count; i++)
         {
-            float xPosition = xSize + i * xSize;
+            float xPosition =  0.35f * graphContainer.sizeDelta.x * (i + 1);
             float yPosition = valueList[i] / yMax * graphHeight;
             GameObject curDot = createCircle(new Vector2(xPosition, yPosition), r, g, b);
             if (prevDot != null)
@@ -121,7 +144,6 @@ public class graphDrawer : MonoBehaviour
         dir = dir.normalized;
         float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         if (n < 0) n += 360;
-
         return n;
     }
 }
